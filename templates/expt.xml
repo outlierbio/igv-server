@@ -1,0 +1,9 @@
+<?xml version="1.0" ?>
+<Global name="{{ expt['name'] }}: {{ expt['description'] }}">
+
+{% for bam in bams %}
+<Resource name="{{ bam['name'] }}" path="{{ bam['path'] }}"/>
+{% endfor %}
+
+</Global>
+
