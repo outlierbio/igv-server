@@ -25,7 +25,7 @@ database with a good API.
 
 The database must have an experiments table and a samples table (set
 the exact table names as a constant in `app.py`). Samples are linked to 
-experiments via the field "Experiment" by defualt, but this can also be 
+experiments via the field "Experiment" by default, but this can also be 
 set as a constant. Note that Airtable uses URL encoding for the table names.
 
 ```
@@ -41,6 +41,9 @@ corresponding BAM file.
 
 That's it! Start the server with `python app.py`
 
+Take a look at [this blog post](https://medium.com/outlier-bio-blog/wrangle-your-scattered-datasets-and-pipelines-with-airtable-5ddbf2bd4cd1#.4u0h9vsgl)
+for an overview on how to connect Airtable with NGS pipelines.
+
 ## Acknowledgments
-Thanks to @nkrumm for code (https://github.com/nkrumm/s3proxy) to stream S3 
-objects in a format suitable to IGV. All I did here was to hook up the pieces.
+Thanks to @nkrumm for [S3proxy](https://github.com/nkrumm/s3proxy) code to stream 
+S3 objects in a format suitable to IGV. All I did here was to hook up the pieces.
