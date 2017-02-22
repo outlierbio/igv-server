@@ -13,9 +13,13 @@ be the same path, but with the ".bai" appended to the path, as is standard
 practice.
 
 Set the S3 bucket as an environment variable:
+
 ```
 $ export S3_BUCKET=my-bucket
 ```
+
+Make sure your AWS credentials are configured in a way that `boto3` can 
+find them.
 
 ### Database configuration
 The second requirement is a metadata database with experiments and samples,
@@ -36,7 +40,7 @@ SAMPLE_EXPT_FIELD = 'Experiment'
 
 The code expects a few standard column names. Besides the "Name" field, which
 is standard for Airtable, each table must have a "Description" text field, and 
-each Sample recordmust have a "BAM" field containing the S3 url to the 
+each Sample record must have a "BAM" field containing the S3 url to the 
 corresponding BAM file. 
 
 That's it! Start the server with `python app.py`
