@@ -38,6 +38,7 @@ API_ENDPOINT = os.environ.get('AIRTABLE_API_ENDPOINT')
 EXPT_TABLE = 'Genomics%20Expt'
 SAMPLE_TABLE = 'Genomics%20Sample'
 SAMPLE_EXPT_FIELD = 'Experiment'
+SAMPLE_DESCRIPTION_FIELD = 'Description'
 
 cache = SimpleCache()
 app = Flask(__name__)
@@ -90,12 +91,13 @@ def get_experiments():
 def get_bams(expt_name):
     params = {
         'filterByFormula': '{Experiment} = "%s"' % expt_name,
-        'fields[]': ['Name', 'BAM']
+        'fields[]': ['Name', 'Description', 'BAM']
     }
     records = _request('get', SAMPLE_TABLE, '/', params=params)['records']
     return [
         {
-            'name': record['fields']['Name'], 
+            'name': record['fields']['Name'],
+            'description': record['fields'].get('Description', ''),
             'url': record['fields'].get('BAM', '')
         }
         for record in records
@@ -169,7 +171,8 @@ def build_xml_menu(expt_name):
         for bam in bams:
             bucket, key_path = path_to_bucket_and_key(bam['url'])
             bam['path'] = request.url_root + 'files/' + key_path
-        menu = render_template('expt.xml', expt=expt[0], bams=bams)
+        sorted_bams = sorted(bams, key=lambda bam: bam['name'])
+        menu = render_template('expt.xml', expt=expt[0], bams=sorted_bams)
         cache.set(expt_name + '_xml', menu, timeout=24*60*60)
     return menu
 

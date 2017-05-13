@@ -2,7 +2,7 @@
 <Global name="{{ expt['name'] }}: {{ expt['description'] }}">
 
 {% for bam in bams %}
-<Resource name="{{ bam['name'] }}" path="{{ bam['path'] }}"/>
+<Resource name="{{ bam['name'] }}: {{ bam['description'] }}" path="{{ bam['path'] }}"/>
 {% endfor %}
 
 </Global>
